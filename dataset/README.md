@@ -1,0 +1,2 @@
+# cypro_pyproject/dataset
+The dataset used in this project was provided by CyberPro Israel Academy as part of the final assignment of the Python Module during the Data Analytics course. By using this dataset, the collaborators do not claim any affiliation with the provider, nor do they have any knowledge of how, when, or from where the dataset was acquired. Furthermore, the collaborators do not make any representations as to the accuracy or legitimacy of the dataset. Any inquiries regarding the dataset should be directed to the CyberPro Israel Academy.
