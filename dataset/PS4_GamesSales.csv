@@ -292,7 +292,7 @@ Secret of Mana,2018,Role-Playing,Square Enix,0.06,0.12,0.05,0.04,0.28
 Gundam Versus,2017,Action,Namco Bandai Games,0.08,0,0.18,0.02,0.28
 NBA Live 14,2013,Sports,EA Sports,0.17,0.05,0,0.05,0.27
 Bravo Team VR,2018,Shooter,Sony Interactive Entertainment,0.12,0.09,0.02,0.04,0.27
-Killing Floor 2 ,2016,Shooter,Tripwire Interactive,0.19,0.03,0,0.05,0.27
+Killing Floor 2,2016,Shooter,Tripwire Interactive,0.19,0.03,0,0.05,0.27
 Robinson: The Journey,2016,Action-Adventure,Sony Interactive Entertainment,0.14,0.09,0,0.05,0.27
 DriveClub VR,2016,Racing,Sony Interactive Entertainment,0.12,0.09,0.01,0.04,0.27
 Fate/Extella: The Umbral Star,2016,Action,PQube,0.12,0,0.12,0.03,0.27
@@ -339,7 +339,7 @@ Dragon's Dogma,2017,Role-Playing,Capcom,0.07,0.07,0.03,0.03,0.21
 Godzilla (2015),2014,Action,Namco Bandai Games,0.11,0.03,0.03,0.03,0.2
 Eagle Flight,2016,Adventure,Ubisoft,0.09,0.08,0,0.03,0.2
 Agents of Mayhem,2017,Action,Deep Silver,0.08,0.08,0,0.03,0.2
-MotoGP 14 ,2014,Racing,Milestone S.r.l.,0.05,0.11,0,0.03,0.2
+MotoGP 14,2014,Racing,Milestone S.r.l.,0.05,0.11,0,0.03,0.2
 Elite: Dangerous,2017,Simulation,Frontier Developments,0.06,0.1,0,0.03,0.19
 Singstar: Ultimate Party,2014,Music,Sony Computer Entertainment,0,0.16,0,0.03,0.19
 Toukiden Kiwami,2015,Action,Tecmo Koei,0.06,0.07,0.03,0.03,0.19
@@ -365,7 +365,7 @@ Battlezone,2016,Action,Sony Interactive Entertainment,0.09,0.04,0,0.03,0.16
 Naruto Shippuden: Ultimate Ninja Storm Legacy,2017,Fighting,Namco Bandai Games,0.07,0.04,0.03,0.02,0.16
 Berserk and the Band of the Hawk,2016,Action,Tecmo Koei,0.07,0.02,0.05,0.02,0.16
 BlazBlue: Chrono Phantasma Extend,2015,Fighting,PQube,0.08,0.04,0.02,0.02,0.16
-Pillars of Eternity,2017,Role-Playing,Paradox Interactive ,0.11,0.02,0,0.03,0.16
+Pillars of Eternity,2017,Role-Playing,Paradox Interactive,0.11,0.02,0,0.03,0.16
 Valkyria: Azure Revolution,2017,Role-Playing,Deep Silver,0.04,0.03,0.07,0.02,0.16
 Gravity Rush Remastered,2015,Action-Adventure,Sony Computer Entertainment,0.02,0.06,0.05,0.02,0.16
 Psycho-Pass: Mandatory Happiness,2016,Visual Novel,NIS America,0.1,0.02,0,0.03,0.15
@@ -553,7 +553,7 @@ Worms: WMD,2016,Strategy,Team17 Digital Ltd,0.02,0.02,0,0.01,0.05
 Syberia III,2017,Adventure,Microids,0.04,0,0,0.01,0.05
 Sengoku Basara: Sanada Yukimura-Den,2016,Action,Capcom,0,0,0.05,0,0.05
 Sengoku Basara 4: Sumeragi,2015,Action,Capcom,0,0,0.05,0,0.05
-Sébastien Loeb Rally Evo,2016,Racing,Milestone S.r.l,0,0.04,0,0.01,0.05
+Sebastien Loeb Rally Evo,2016,Racing,Milestone S.r.l,0,0.04,0,0.01,0.05
 Don't Starve,2018,Adventure,505 Games,0.04,0,0,0.01,0.05
 Monster Jam: Crush It,2016,Racing,GameMill,0.04,0,0,0.01,0.05
 Prison Architect,2016,Simulation,Introversion Software,0.02,0.02,0,0.01,0.05
@@ -861,11 +861,11 @@ Ready to Run,N/A,Misc,,0,0,0,0,0
 Worms Battlegrounds,N/A,Misc,,0,0,0,0,0
 Assassin's Creed Freedom Cry,N/A,Misc,,0,0,0,0,0
 Dungeon Defenders II,N/A,Action,,0,0,0,0,0
-Razor Global Domination Pro Tour ,N/A,Misc,,0,0,0,0,0
+Razor Global Domination Pro Tour,N/A,Misc,,0,0,0,0,0
 Pavilion,N/A,Misc,,0,0,0,0,0
 forma.8,N/A,Misc,,0,0,0,0,0
 TowerFall,2014,Misc,Unknown,0,0,0,0,0
-Gone Home ,N/A,Adventure,,0,0,0,0,0
+Gone Home,N/A,Adventure,,0,0,0,0,0
 Costume Quest 2,N/A,Role-Playing,,0,0,0,0,0
 Pure Chess,N/A,Misc,,0,0,0,0,0
 Aztez,N/A,Misc,,0,0,0,0,0
@@ -876,7 +876,7 @@ Adr1ft,N/A,Adventure,,0,0,0,0,0
 R.B.I. Baseball 14,2014,Misc,MLB.com,0,0,0,0,0
 Citizens of Earth,N/A,Misc,,0,0,0,0,0
 H1Z1,N/A,Shooter,,0,0,0,0,0
-Blue Estate ,2014,Misc,Focus Home Interactive,0,0,0,0,0
+Blue Estate,2014,Misc,Focus Home Interactive,0,0,0,0,0
 Road Not Taken,N/A,Misc,,0,0,0,0,0
 Source,N/A,Misc,,0,0,0,0,0
 Backgammon Blitz,N/A,Misc,,0,0,0,0,0
@@ -890,20 +890,20 @@ MouseCraft,N/A,Misc,,0,0,0,0,0
 Starwhal: Just the Tip,N/A,Misc,,0,0,0,0,0
 Crimsonland,N/A,Misc,,0,0,0,0,0
 VizionEck,N/A,Misc,,0,0,0,0,0
-Pure Pool ,2014,Misc,Triniti Interactive,0,0,0,0,0
+Pure Pool,2014,Misc,Triniti Interactive,0,0,0,0,0
 Without Memory,2016,Misc,Unknown,0,0,0,0,0
 Firewatch,N/A,Adventure,,0,0,0,0,0
 Never Alone,N/A,Misc,,0,0,0,0,0
 The Last Tinker: City of Colors,N/A,Platform,,0,0,0,0,0
 Bombshell,2014,Misc,3D Realms,0,0,0,0,0
 Red Goddess,N/A,Platform,,0,0,0,0,0
-The Forest,2015,Action,Endnight Games Ltd ,0,0,0,0,0
+The Forest,2015,Action,Endnight Games Ltd,0,0,0,0,0
 Fenix Rage,N/A,Misc,,0,0,0,0,0
 EarthNight,N/A,Action,,0,0,0,0,0
 One Way Trip,N/A,Adventure,,0,0,0,0,0
 Shiness: The Lightning Kingdom,N/A,Role-Playing,,0,0,0,0,0
 Aaru's Awakening,N/A,Action,,0,0,0,0,0
-Falling Skies: The Game ,2015,Role-Playing,Little Orbit,0,0,0,0,0
+Falling Skies: The Game,2015,Role-Playing,Little Orbit,0,0,0,0,0
 Onigiri,N/A,Role-Playing,,0,0,0,0,0
 Loadout,N/A,Shooter,,0,0,0,0,0
 Entwined,N/A,Action,,0,0,0,0,0
@@ -915,10 +915,10 @@ Inside,N/A,Platform,,0,0,0,0,0
 Blast 'Em Bunnies,N/A,Action,,0,0,0,0,0
 Woah Dave!,N/A,Action,,0,0,0,0,0
 The Assembly,N/A,Adventure,,0,0,0,0,0
-Tetris Ultimate ,2014,Puzzle,Ubisoft,0,0,0,0,0
+Tetris Ultimate,2014,Puzzle,Ubisoft,0,0,0,0,0
 Afro Samurai 2,2015,Action,Versus Evil,0,0,0,0,0
 The Legend of Korra (2014),2014,Action,Activision,0,0,0,0,0
-The Vanishing of Ethan Carter ,2015,Adventure,The Astronauts,0,0,0,0,0
+The Vanishing of Ethan Carter,2015,Adventure,The Astronauts,0,0,0,0,0
 Godzilla (2014),2014,Action,Namco Bandai Games,0,0,0,0,0
 Gran Turismo 7,2020,Racing,Sony Computer Entertainment,0,0,0,0,0
 Rollers of the Realm,N/A,Role-Playing,,0,0,0,0,0
