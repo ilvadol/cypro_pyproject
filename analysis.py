@@ -1,5 +1,5 @@
 import pandas as pd
-from cleaning import import_and_clean_data
+from loading_cleaning import import_and_clean_data
 
 
 def print_genres_by_top_publishers(df, year, n):
