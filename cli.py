@@ -68,40 +68,45 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # Defining the function to print verbose information
-def switchVebose():
+def switch_verbose():
     global verbose 
     verbose = not verbose
     print ("Verbose mode: " + ("ON\nYou will see the steps of advanced calculations plus additional information" if verbose else "OFF"))
 
+# Defining the function to exit the program
 def exit_program():
     clear_screen()
     print_centered(gm.goodbyemessage)
     exit()
 
+# Defining the function to print the help message
 def print_help():
     clear_screen()
     print_centered(gm.helpmessage)
     wait_for_key()
     clear_screen()
 
+# Defining the function to print the welcome message
 def print_welcome():
     clear_screen()
     print_centered(gm.welcomemessage)
     wait_for_key()
     clear_screen()
 
-command_dict = {
+# Defining the command list
+command_list = {
     "clear": clear_screen,
     "clr": clear_screen,
     "help": print_help,
     "exit": exit_program,
-    "verbose": switchVebose,
-    "ver": switchVebose
+    "verbose": switch_verbose,
+    "ver": switch_verbose
 }
 
+# Defining the function that checks the input against the command list
 def check_input(entered_input):
     entered_input = str(entered_input).lower()
-    func = command_dict.get(entered_input)
+    func = command_list.get(entered_input)
     if func is exit_program:
         func()
     if func is not None:
@@ -112,11 +117,21 @@ def check_input(entered_input):
     else:
         return entered_input
 
-#def main():
+#===============#
+# Menu function #
+#===============#
+
+def print_menu():
+    clear_screen()
+    print_centered(gm.menugraphic)
+    print(gm.menutext)
+
+def main():
     print_welcome()
     while True:
-        INPUT = input(">> ")
+        print_menu()
+        INPUT = input(">>> ")
         check_input(INPUT)
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
     main()
