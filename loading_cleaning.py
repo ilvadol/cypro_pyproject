@@ -1,119 +1,134 @@
-#импортировали нужные библиотеки
+# Imported necessary libraries
 import numpy as np
 import pandas as pd
 import shutil
 import os
 
 def setup_pandas():
-    #настроили пандас для полного отображения таблиц
+    # Configured pandas for full display of tables
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
 
-def backup_csv(PATH, verb=False):
-    # backup the file
-    if verb:
+def backup_csv(filepath, verboseMode=False):
+    # Backup the file
+    if verboseMode:
         print("Backing up file...")
-    PATHBakup = PATH.replace('.csv', '_backup.csv')
-    shutil.copy(PATH, PATHBakup)
-    if verb and os.path.exists(PATHBakup):
-        print("Backup created:", PATHBakup)
+    filepathBackup = filepath.replace('.csv', '_backup.csv')
+    if os.path.exists(filepathBackup):
+        if verboseMode:
+            print("Backup already exists:", filepathBackup)
+        return
+    shutil.copy(filepath, filepathBackup)
+    if verboseMode and os.filepath.exists(filepathBackup):
+        print("Backup created:", filepathBackup)
 
-def import_csv(PATH):
-    #сделали датафрейм, прочитав csv
-    df = pd.read_csv(PATH)
-    print(df.head())
-    return df
+def import_csv(filepath, verboseMode=False):
+    # Created dataFrame by reading CSV
+    dataFrame = pd.read_csv(filepath)
+    if verboseMode:
+        print("Imported data:")
+        print(dataFrame.head())
+    return dataFrame
 
-def print_summary(df):
-    #отобразили сводную инфу датафрейма
-    df.info()
-    df.describe()
+def print_summary(dataFrame):
+    # Displayed summary information of the dataFrame
+    print("Summary information:")
+    print(dataFrame.head())
+    print(dataFrame.tail())
+    print(dataFrame.info())
+    print(dataFrame.describe())
 
-def delete_missing_values(df, verb=False):
-    nan_count = df.isna().sum().sum()
-    if verb:
-        #смотрим сколько NaN значений в колонках
+def delete_missing_values(dataFrame, verboseMode=False):
+    nan_count = dataFrame.isna().sum().sum()
+    if verboseMode:
+        # Checked the number of NaN values in columns
         print("Missing values:")
         print(nan_count)
-    if nan_count >> 0:
-        if verb:
+    if nan_count > 0:
+        if verboseMode:
             print("There are missing values! Deleting...")
-        #удаляем NaN
-        df = df.dropna()
+        # Removed NaN
+        dataFrame = dataFrame.dropna()
     else:
-        if verb:
+        if verboseMode:
             print("No missing values")
-    return df
+    return dataFrame
 
-def fix_datatypes(df, verb=False):
-    if verb:
+def fix_datatypes(dataFrame, verboseMode=False):
+    if verboseMode:
         print("Datatypes:")
         # Check datatypes
-        print(df.dtypes)
+        print(dataFrame.dtypes)
         # Show column names
-        print(df.columns)
-        #Columns: 'Game', 'Year', 'Genre', 'Publisher', 'North America', 'Europe', 'Japan', 'Rest of World', 'Global'
-        print(df.head())
+        print(dataFrame.columns)
+        # Columns: 'Game', 'Year', 'Genre', 'Publisher', 'North America', 'Europe', 'Japan', 'Rest of World', 'Global'
+        print(dataFrame.head())
     # Fix datatypes
-    df['Game'] = df['Game'].astype('string')
-    df['Year'] = pd.to_datetime(df['Year'], format='%Y')
-    df['Genre'] = df['Genre'].astype('string')
-    df['Publisher'] = df['Publisher'].astype('string')
-    df['North America'] = df['North America'].astype(float)
-    df['Europe'] = df['Europe'].astype(float)
-    df['Japan'] = df['Japan'].astype(float)
-    df['Rest of World'] = df['Rest of World'].astype(float)
-    df['Global'] = df['Global'].astype(float)
-    if verb:
+    dataFrame['Game'] = dataFrame['Game'].astype('string')
+    dataFrame['Year'] = dataFrame['Year'].astype(int)
+    dataFrame['Genre'] = dataFrame['Genre'].astype('string')
+    dataFrame['Publisher'] = dataFrame['Publisher'].astype('string')
+    dataFrame['North America'] = dataFrame['North America'].astype(float)
+    dataFrame['Europe'] = dataFrame['Europe'].astype(float)
+    dataFrame['Japan'] = dataFrame['Japan'].astype(float)
+    dataFrame['Rest of World'] = dataFrame['Rest of World'].astype(float)
+    dataFrame['Global'] = dataFrame['Global'].astype(float)
+    if verboseMode:
         print("Datatypes after fix:")
-        print(df.dtypes)
-        print(df.head())
-    return df
+        print(dataFrame.dtypes)
+        print(dataFrame.head())
+    return dataFrame
 
-def remove_duplicates(df, verb=False):
-    number_of_duplicates = df.duplicated().sum()
-    if verb:
+def remove_duplicates(dataFrame, verboseMode=False):
+    number_of_duplicates = dataFrame.duplicated().sum()
+    if verboseMode:
         print("Duplicates:")
-        print(df.duplicated().sum())
+        print(dataFrame.duplicated().sum())
     if number_of_duplicates > 0:
-        if verb:
+        if verboseMode:
             print("There are duplicates! Removing...")
-        df = df.drop_duplicates()
-        if verb:
+        dataFrame = dataFrame.drop_duplicates()
+        if verboseMode:
             print("Duplicates after removal:")
-            print(df.duplicated().sum())
-
+            print(dataFrame.duplicated().sum())
     else:
-        if verb:
+        if verboseMode:
             print("No duplicates")
-    return df
+    return dataFrame
 
-def ask_to_export_csv(dataframe, PATH, verb=False):
-    #ask user if he wants to export
-    PATH = PATH.replace('.csv', '_cleaned.csv')
+def ask_to_export_csv(dataFrame, filepath, verboseMode=False):
+    # Ask user if they want to export
+    filepathClean = filepath.replace('.csv', '_cleaned.csv')
+    if os.path.exists(filepathClean):
+        if verboseMode:
+            print("Cleaned data already exists:", filepathClean)
+        return
     userInput = input("Export cleaned data to csv for further use? (y/n): ")   
     if userInput == 'y' or userInput == 'Y' or userInput == 'yes' or userInput == 'Yes' or userInput == 'YES':
         print("Exporting...")
-        dataframe.to_csv(PATH, index=False)
-        if verb:
-            print("Exported to", PATH)    
+        dataFrame.to_csv(filepath, index=False)
+        if verboseMode:
+            print("Exported to", filepath)    
     else:
         print("OK. Not exporting")
 
-#хз какие функции пока что понадобятся, пока не обозначили отдельные задачи по анализу
-
-def import_and_clean_data(DATA_PATH, verb=False):
+def import_and_clean_data(DATA_filepath, verboseMode=False):
     setup_pandas()
-    backup_csv(DATA_PATH, verb)
-    df = import_csv(DATA_PATH)
-    if verb:
-        print_summary(df)
-    df = delete_missing_values(df, verb)
-    df = fix_datatypes(df, verb)
-    df = remove_duplicates(df, verb)
-    ask_to_export_csv(df, DATA_PATH, verb)
-    return df
+    backup_csv(DATA_filepath, verboseMode)
+    dataFrame = import_csv(DATA_filepath)
+    if verboseMode:
+        print("Imported data to clean:")
+        print_summary(dataFrame)
+    dataFrame = delete_missing_values(dataFrame, verboseMode)
+    dataFrame = fix_datatypes(dataFrame, verboseMode)
+    dataFrame = remove_duplicates(dataFrame, verboseMode)
+    ask_to_export_csv(dataFrame, DATA_filepath, verboseMode)
+    if verboseMode:
+        print("Cleaned data:")
+        print_summary(dataFrame)
+    return dataFrame
 
 if __name__ == "__main__":
     verbose = True
-    import_and_clean_data("cypro_pyproject/dataset/PS4_GamesSales.csv", verbose)
+    DATA = "cypro_pyproject/dataset/PS4_GamesSales.csv"
+    import_and_clean_data(DATA, verbose)
