@@ -19,7 +19,7 @@ def backup_csv(filepath, verboseMode=False):
             print("Backup already exists:", filepathBackup)
         return
     shutil.copy(filepath, filepathBackup)
-    if verboseMode and os.filepath.exists(filepathBackup):
+    if verboseMode and os.path.exists(filepathBackup):
         print("Backup created:", filepathBackup)
 
 def import_csv(filepath, verboseMode=False):
