@@ -13,9 +13,20 @@ def genres_by_top_publishers(df, year, num = 5, plot = True, show_plot = False):
     ds_top_publishers = df_publishers['Global'].sum().sort_values(ascending=False).head(num)
     print("\n", ds_top_publishers)
     ds_top_genres = df[(df['Year'] == year) & (df['Publisher'].isin(ds_top_publishers.index))][['Genre']]
+    ds_top_genres = ds_top_genres.sort_values('Genre', ascending=False)
     print("\n", ds_top_genres.value_counts())
     # print(ds_publishers.value_counts()) если хотим посмотреть топ издательств относительно кол-ва игр
     if plot:
+        ds_top_genres.value_counts().plot(kind='bar', color='green')
+        plt.title('Top Genres of ' + str(year) + ' by Top Publishers')
+        plt.xlabel(None)
+        plt.ylabel('Number of Games Released')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top_genres.png'
+        plt.savefig(FIGURE_PATH)
+        if show_plot:
+            plt.show()
         ds_top_publishers.plot(kind='bar', color='red')
         plt.title('Top Publishers of ' + str(year))
         plt.xlabel(None)
@@ -40,6 +51,10 @@ def total_sales_over_time_in_region(df, region, plot = True, show_plot = False):
     if plot:
         ds_global_sales_over_time.plot(x='Year', y=region)
         FIGURE_PATH = FIGURE_FOLDER + region + '_total_sales_over_time.png'
+        plt.title('Total Sales of All Games Over Time in ' + region)
+        plt.xlabel(None)
+        plt.ylabel('Total Sales (in millions)')
+        plt.tight_layout()
         plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
@@ -55,6 +70,9 @@ def franchise_sales_over_time(df, franchise_name, region, plot = True, show_plot
     if plot:
         ds_franchise_sales_over_time.plot(x='Game', y=region, kind='bar', color='green')
         FIGURE_PATH = FIGURE_FOLDER + franchise_name + '_franchise_sales_over_time.png'
+        plt.title(franchise_name + ' Franchise Sales Over Time')
+        plt.xlabel(None)
+        plt.ylabel(region + ' Sales (in millions)')
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.savefig(FIGURE_PATH)
