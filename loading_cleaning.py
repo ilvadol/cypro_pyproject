@@ -143,15 +143,40 @@ def import_and_clean_data(DATA_filepath, verboseMode=False, backup=True, fix_dty
         print("Imported data to clean:")
         print_summary(dataFrame)
     if fix_dtypes:
+        if verboseMode:
+            print("Fixing datatypes flag is set")
         dataFrame = fix_datatypes(dataFrame, verboseMode)
+    else:
+        if verboseMode:
+            print("Fixing datatypes flag is not set")
     if del_miss_val:
+        if verboseMode:
+            print("Deleting missing values flag is set")
         dataFrame = delete_missing_values(dataFrame, verboseMode)
+    else:
+        if verboseMode:
+            print("Deleting missing values flag is not set")
     if fill_miss_val:
+        if verboseMode:
+            print("Filling missing values flag is set")
         dataFrame = fill_missing_values(dataFrame, verboseMode)
+    else:
+        if verboseMode:
+            print("Filling missing values flag is not set")
     if rem_dupl:
+        if verboseMode:
+            print("Removing duplicates flag is set")
         dataFrame = remove_duplicates(dataFrame, verboseMode)
+    else:
+        if verboseMode:
+            print("Removing duplicates flag is not set")
     if export_clean:
+        if verboseMode:
+            print("Exporting cleaned data flag is set")
         ask_to_export_csv(dataFrame, DATA_filepath, verboseMode)
+    else:
+        if verboseMode:
+            print("Exporting cleaned data flag is not set")
     if verboseMode:
         print("Cleaned data:")
         print_summary(dataFrame)
