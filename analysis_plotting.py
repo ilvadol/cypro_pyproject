@@ -23,7 +23,7 @@ def genres_by_top_publishers(df, year, num = 5, plot = True, show_plot = False):
         plt.ylabel('Number of Games Released')
         plt.xticks(rotation=45)
         plt.tight_layout()
-        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top_genres.png'
+        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top' + str(num) + '_genres.png'
         plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
@@ -33,7 +33,7 @@ def genres_by_top_publishers(df, year, num = 5, plot = True, show_plot = False):
         plt.ylabel(str(year) + ' Sales (in millions)')
         plt.xticks(rotation=45)
         plt.tight_layout()
-        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top_publishers.png'
+        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top' + str(num) + '_publishers.png'
         plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
@@ -50,7 +50,7 @@ def total_sales_over_time_in_region(df, region, plot = True, show_plot = False):
     print("\n", ds_global_sales_over_time.to_string(index = False))
     if plot:
         ds_global_sales_over_time.plot(x='Year', y=region)
-        FIGURE_PATH = FIGURE_FOLDER + region + '_total_sales_over_time.png'
+        FIGURE_PATH = FIGURE_FOLDER + region.replace(' ', '_') + '_total_sales_over_time.png'
         plt.title('Total Sales of All Games Over Time in ' + region)
         plt.xlabel(None)
         plt.ylabel('Total Sales (in millions)')
@@ -69,7 +69,7 @@ def franchise_sales_over_time(df, franchise_name, region, plot = True, show_plot
     print("\n", ds_franchise_sales_over_time.to_string(index = False))
     if plot:
         ds_franchise_sales_over_time.plot(x='Game', y=region, kind='bar', color='green')
-        FIGURE_PATH = FIGURE_FOLDER + franchise_name + '_franchise_sales_over_time.png'
+        FIGURE_PATH = FIGURE_FOLDER + franchise_name.replace(' ', '_') + '_franchise_sales_over_time_in_' + region.replace(' ', '_') + '.png'
         plt.title(franchise_name + ' Franchise Sales Over Time')
         plt.xlabel(None)
         plt.ylabel(region + ' Sales (in millions)')
@@ -95,7 +95,7 @@ def average_sales_per_genre_per_region(df, region, plot = True, show_plot = Fals
         plt.xlabel('Genre')
         plt.ylabel('Average Sales (in millions)')
         plt.tight_layout()
-        FIGURE_PATH = FIGURE_FOLDER + region + '_avg_sales_per_genre.png'
+        FIGURE_PATH = FIGURE_FOLDER + region.replace(' ', '_') + '_avg_sales_per_genre.png'
         plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
