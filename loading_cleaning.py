@@ -134,18 +134,24 @@ def ask_to_export_csv(dataFrame, filepath, verboseMode=False):
     else:
         print("OK. Not exporting")
 
-def import_and_clean_data(DATA_filepath, verboseMode=False):
+def import_and_clean_data(DATA_filepath, verboseMode=False, backup=True, fix_dtypes=False, del_miss_val=False, fill_miss_val=False, rem_dupl=True, export_clean=False):
     setup_pandas()
-    backup_csv(DATA_filepath, verboseMode)
+    if backup:
+        backup_csv(DATA_filepath, verboseMode)
     dataFrame = import_csv(DATA_filepath)
     if verboseMode:
         print("Imported data to clean:")
         print_summary(dataFrame)
-    #dataFrame = fix_datatypes(dataFrame, verboseMode)
-    #dataFrame = delete_missing_values(dataFrame, verboseMode)
-    #dataFrame = fill_missing_values(dataFrame, verboseMode)
-    dataFrame = remove_duplicates(dataFrame, verboseMode)
-    ask_to_export_csv(dataFrame, DATA_filepath, verboseMode)
+    if fix_dtypes:
+        dataFrame = fix_datatypes(dataFrame, verboseMode)
+    if del_miss_val:
+        dataFrame = delete_missing_values(dataFrame, verboseMode)
+    if fill_miss_val:
+        dataFrame = fill_missing_values(dataFrame, verboseMode)
+    if rem_dupl:
+        dataFrame = remove_duplicates(dataFrame, verboseMode)
+    if export_clean:
+        ask_to_export_csv(dataFrame, DATA_filepath, verboseMode)
     if verboseMode:
         print("Cleaned data:")
         print_summary(dataFrame)
