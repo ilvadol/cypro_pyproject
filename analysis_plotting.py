@@ -40,6 +40,23 @@ def print_total_sales_over_time_in_region(df, region, plot = True, show_plot = F
             plt.show()
 
 
+def franchise_sales_over_time(df, franchise_name, region, plot = True, show_plot = False):
+    # Franchise Sales Over Time (Продажи по франшизам)
+    # → Что показывает: Объём продаж одной франшизы в разбивке по месяцам или годам.
+    df_franchise = df[df['Game'].str.contains(franchise_name, case=False)]
+    ds_franchise_sales_over_time = df_franchise.groupby('Game')[region].sum()
+    ds_franchise_sales_over_time = ds_franchise_sales_over_time.reset_index().sort_values(region, ascending=False)
+    print("\n", ds_franchise_sales_over_time.to_string(index = False))
+    if plot:
+        ds_franchise_sales_over_time.plot(x='Game', y=region, kind='bar', color='green')
+        FIGURE_PATH = FIGURE_FOLDER + franchise_name + '_franchise_sales_over_time.png'
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.savefig(FIGURE_PATH)
+        if show_plot:
+            plt.show()
+
+
 # Average Sales per Genre per Region (Средние продажи игр по жанрам по регионам)
 # → Что показывает: Средний объём продаж одной игры в каждом регионе (NA, EU, JP, Other).
 # → Зачем: Помогает выявить регионы с наибольшей вовлечённостью в покупку игр.
@@ -52,3 +69,4 @@ if __name__ == '__main__':
     df = import_and_clean_data(DATAPATH, verbose)
     print_genres_by_top_publishers(df, 2016)
     print_total_sales_over_time_in_region(df, 'Europe')
+    franchise_sales_over_time(df, 'Call of Duty', 'Global')
