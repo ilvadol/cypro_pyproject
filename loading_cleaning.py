@@ -43,6 +43,9 @@ def delete_missing_values(dataFrame, verboseMode=False):
     if verboseMode:
         # Checked the number of NaN values in columns
         print("Missing values:")
+        print(dataFrame.isna().sum())
+        # Checked the total number of NaN values
+        print("Total missing values:")
         print(nan_count)
     if nan_count > 0:
         if verboseMode:
@@ -53,6 +56,25 @@ def delete_missing_values(dataFrame, verboseMode=False):
         if verboseMode:
             print("No missing values")
     return dataFrame
+
+def fill_missing_values(dataFrame, verboseMode=False):
+    nan_count = dataFrame.isna().sum().sum()
+    if verboseMode:
+        # Checked the number of NaN values in columns
+        print("Missing values:")
+        print(dataFrame.isna().sum())
+        # Checked the total number of NaN values
+        print("Total missing values:")
+        print(nan_count)
+    if nan_count > 0:
+        if verboseMode:
+            print("There are missing values! Filling...")
+        # Removed NaN
+        dataFrame = dataFrame.fillna('')
+    else:
+        if verboseMode:
+            print("No missing values")
+    return dataFrame 
 
 def fix_datatypes(dataFrame, verboseMode=False):
     if verboseMode:
@@ -119,8 +141,9 @@ def import_and_clean_data(DATA_filepath, verboseMode=False):
     if verboseMode:
         print("Imported data to clean:")
         print_summary(dataFrame)
-    dataFrame = delete_missing_values(dataFrame, verboseMode)
-    dataFrame = fix_datatypes(dataFrame, verboseMode)
+    #dataFrame = fix_datatypes(dataFrame, verboseMode)
+    #dataFrame = delete_missing_values(dataFrame, verboseMode)
+    #dataFrame = fill_missing_values(dataFrame, verboseMode)
     dataFrame = remove_duplicates(dataFrame, verboseMode)
     ask_to_export_csv(dataFrame, DATA_filepath, verboseMode)
     if verboseMode:
