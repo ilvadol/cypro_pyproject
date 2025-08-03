@@ -108,3 +108,4 @@ if __name__ == '__main__':
     genres_by_top_publishers(df, 2016)
     total_sales_over_time_in_region(df, 'Europe')
     franchise_sales_over_time(df, 'Call of Duty', 'Global')
+    average_sales_per_genre_per_region(df, 'North America')
