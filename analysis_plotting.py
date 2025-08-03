@@ -1,18 +1,17 @@
 import pandas as pd
-from loading_cleaning import import_and_clean_data, fix_datatypes
+from loading_cleaning import import_and_clean_data
 
 
-def print_genres_by_top_publishers(df, year, n):
+def print_genres_by_top_publishers(df, year, num = 5):
     # найти топ n издательств по продажам за определенный год
     # показать число игр, опубликованных топовыми издательствами, по жанрам за тот же год
     # эта функция показывыет на основе данных за определенный год жанры которые выпускают самые успешные по продажам компании
     # какие жанры выпускают более продаваемые издатели/ как мыслят самые успешные компании и какие игры они выпускают
     df_publishers = df[df['Year'] == year][['Publisher', 'Global']].groupby('Publisher')
-    ds_top_n = df_publishers['Global'].sum().sort_values(ascending=False).head(n)
-    print(ds_top_n)
-    df_games = df[(df['Year'] == year) & (df['Publisher'].isin(ds_top_n.index))][['Genre']]
-    print(df_games)
-    print(df_games.value_counts())
+    ds_top_publishers = df_publishers['Global'].sum().sort_values(ascending=False).head(num)
+    print("\n", ds_top_publishers)
+    ds_top_genres = df[(df['Year'] == year) & (df['Publisher'].isin(ds_top_publishers.index))][['Genre']]
+    print("\n", ds_top_genres.value_counts())
     # print(ds_publishers.value_counts()) если хотим посмотреть топ издательств относительно кол-ва игр
 
 # Total Global Sales Over Time (Общие мировые продажи по времени)
@@ -30,4 +29,4 @@ if __name__ == '__main__':
     DATAPATH = "cypro_pyproject/dataset/PS4_GamesSales.csv"
     verbose = True
     df = import_and_clean_data(DATAPATH, verbose)
-    print_genres_by_top_publishers(df, 2016, 5)
+    print_genres_by_top_publishers(df, 2016)
