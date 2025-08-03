@@ -106,9 +106,9 @@ def ask_to_export_csv(dataFrame, filepath, verboseMode=False):
     userInput = input("Export cleaned data to csv for further use? (y/n): ")   
     if userInput == 'y' or userInput == 'Y' or userInput == 'yes' or userInput == 'Yes' or userInput == 'YES':
         print("Exporting...")
-        dataFrame.to_csv(filepath, index=False)
+        dataFrame.to_csv(filepathClean, index=False)
         if verboseMode:
-            print("Exported to", filepath)    
+            print("Exported to", filepathClean)    
     else:
         print("OK. Not exporting")
 
