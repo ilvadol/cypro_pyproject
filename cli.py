@@ -3,13 +3,18 @@ import sys
 import os
 import time
 import random
-import graphics_and_messages as gm
+sys.path.append('cypro_pyproject')
+import graphics_messages as gm
+import analysis_plotting as ap
+import loading_cleaning as lc
 
 #==================#
 # Global variables #
 #==================#
 
-verbose = False
+DATAPATH = "cypro_pyproject/dataset/PS4_GamesSales.csv"
+verboseMode = False
+ShowPlots = True
 
 #===============#
 # CLI functions #
@@ -69,9 +74,10 @@ def clear_screen():
 
 # Defining the function to print verbose information
 def switch_verbose():
-    global verbose 
-    verbose = not verbose
-    print ("Verbose mode: " + ("ON\nYou will see the steps of advanced calculations plus additional information" if verbose else "OFF"))
+    global verboseMode
+    verboseMode = not verboseMode
+    print ("Verbose mode: " + ("ON\nYou will see a TON of additional information" if verboseMode else "OFF"))
+    wait_for_key()
 
 # Defining the function to exit the program
 def exit_program():
@@ -104,7 +110,7 @@ command_list = {
 }
 
 # Defining the function that checks the input against the command list
-def check_input(entered_input):
+def check_commandCall(entered_input):
     entered_input = str(entered_input).lower()
     func = command_list.get(entered_input)
     if func is exit_program:
@@ -117,21 +123,65 @@ def check_input(entered_input):
     else:
         return entered_input
 
-#===============#
-# Menu function #
-#===============#
+#================#
+# Menu functions #
+#================#
 
-def print_menu():
+def print_mainmenu():
     clear_screen()
     print_centered(gm.menugraphic)
-    print(gm.menutext)
+    print(gm.mainmenu_text)
+
+def loadData():
+    global DATAPATH
+    global DataFrame
+    DataFrame = lc.import_and_clean_data(DATAPATH, verboseMode)
+    print("Data imported.")
+    wait_for_key()
+
+def analyseData():
+    global DataFrame
+    global ShowPlots
+    Year = input("Choose a year:\n>>> ")
+    check_commandCall(Year)
+    Year = int(Year)
+    Top = input("Choose a number of top publishers:\n>>> ")
+    check_commandCall(Top)
+    Top = int(Top)
+    ap.genres_by_top_publishers(df=DataFrame, year=Year, num=Top, show_plot=ShowPlots)
+    Region = input("Choose a region:\n>>> ")
+    check_commandCall(Region)
+    ap.total_sales_over_time_in_region(df=DataFrame, region=Region, show_plot=ShowPlots)
+    Franshise = input("Choose a franchise:\n>>> ")
+    check_commandCall(Franshise)
+    Region = input("Choose a region:\n>>> ")
+    check_commandCall(Region)
+    ap.franchise_sales_over_time(df=DataFrame, franchise_name=Franshise, region=Region, show_plot=ShowPlots)
+    Region = input("Choose a region:\n>>> ")
+    check_commandCall(Region)
+    ap.average_sales_per_genre_per_region(df=DataFrame, region=Region, show_plot=ShowPlots)
 
 def main():
     print_welcome()
     while True:
-        print_menu()
-        INPUT = input(">>> ")
-        check_input(INPUT)
+        print_mainmenu()
+        userInput = input(">>> ")
+        check_commandCall(userInput)
+        match userInput:
+            case '1':
+                global DATAPATH
+                loadData()
+            case '2':
+                if DataFrame is None:
+                    print ("No data loaded. Please load data first.")
+                    wait_for_key()
+                else:
+                    analyseData()
+            case '3':
+                exit_program()
+            case _:
+                print ("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
+    DataFrame = None
     main()
