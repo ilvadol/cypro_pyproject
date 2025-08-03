@@ -62,9 +62,9 @@ menugraphic = """
 '=================='       '===================='       |
 """
 
-menutext = """
+mainmenu_text = """
+Select an option:
 1. Load Dataset
 2. Analyze Dataset
-3. Visualize Dataset
-4. Exit
+3. Exit
 """
