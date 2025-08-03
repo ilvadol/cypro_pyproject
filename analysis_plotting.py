@@ -80,10 +80,25 @@ def franchise_sales_over_time(df, franchise_name, region, plot = True, show_plot
             plt.show()
 
 
-# Average Sales per Genre per Region (Средние продажи игр по жанрам по регионам)
-# → Что показывает: Средний объём продаж одной игры в каждом регионе (NA, EU, JP, Other).
-# → Зачем: Помогает выявить регионы с наибольшей вовлечённостью в покупку игр.
-
+def average_sales_per_genre_per_region(df, region, plot = True, show_plot = False):
+    # Average Sales per Genre per Region (Средние продажи игр по жанрам по регионам)
+    # → Что показывает: Средний объём продаж одной игры в каждом регионе (NA, EU, JP, Other).
+    # → Зачем: Помогает выявить регионы с наибольшей вовлечённостью в покупку игр.
+    # Группировка по жанру и региону, вычисление среднего значения продаж
+    ds_avg_sales = df.groupby('Genre')[region].mean().reset_index()
+    ds_avg_sales = ds_avg_sales.sort_values(region, ascending=False)
+    print("\n", ds_avg_sales.to_string(index=False))
+    if plot:
+        # Построение графика
+        ds_avg_sales.plot(x='Genre', y=region, kind='bar', color='blue')
+        plt.title('Average Sales per Genre in ' + region)
+        plt.xlabel('Genre')
+        plt.ylabel('Average Sales (in millions)')
+        plt.tight_layout()
+        FIGURE_PATH = FIGURE_FOLDER + region + '_avg_sales_per_genre.png'
+        plt.savefig(FIGURE_PATH)
+        if show_plot:
+            plt.show()
 
 
 if __name__ == '__main__':
