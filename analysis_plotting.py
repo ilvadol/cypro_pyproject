@@ -14,19 +14,27 @@ def print_genres_by_top_publishers(df, year, num = 5):
     print("\n", ds_top_genres.value_counts())
     # print(ds_publishers.value_counts()) если хотим посмотреть топ издательств относительно кол-ва игр
 
-# Total Global Sales Over Time (Общие мировые продажи по времени)
-# → Что показывает: Общий объём продаж всех игр в мире в разбивке по месяцам или годам.
-# → Зачем: Позволяет понять общие тренды на рынке (спады, пики интереса к играм).
 
-# def print_top_sales_by_year(df):
-#     df_years = pd.to_numeric(df['Year'], errors='coerce').dropna()
-#     print(df_years)
-#     # Группировка по году и суммирование продаж
-#     global_sales_by_year = df.groupby('Year')['Global'].sum().sort_index()
-#     print(global_sales_by_year)
+def print_total_sales_over_time_in_region(df, region):
+    # Total Global Sales Over Time (Общие мировые продажи по времени)
+    # → Что показывает: Общий объём продаж всех игр в мире в разбивке по месяцам или годам.
+    # → Зачем: Позволяет понять общие тренды на рынке (спады, пики интереса к играм).
+    # Группировка по году и суммирование продаж
+    ds_global_sales_over_time = df.groupby('Year')[region].sum()
+    ds_global_sales_over_time = ds_global_sales_over_time.reset_index()
+    ds_global_sales_over_time['Year'] = ds_global_sales_over_time['Year'].astype(int)
+    print("\n", ds_global_sales_over_time.to_string(index = False))
+
+
+# Average Sales per Genre per Region (Средние продажи игр по жанрам по регионам)
+# → Что показывает: Средний объём продаж одной игры в каждом регионе (NA, EU, JP, Other).
+# → Зачем: Помогает выявить регионы с наибольшей вовлечённостью в покупку игр.
+
+
 
 if __name__ == '__main__':
     DATAPATH = "cypro_pyproject/dataset/PS4_GamesSales.csv"
-    verbose = True
+    verbose = False
     df = import_and_clean_data(DATAPATH, verbose)
-    print_genres_by_top_publishers(df, 2016)
+    # print_genres_by_top_publishers(df, 2016)
+    print_total_sales_over_time_in_region(df, 'Europe')
