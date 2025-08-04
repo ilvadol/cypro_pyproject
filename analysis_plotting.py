@@ -39,7 +39,7 @@ def genres_by_top_publishers(df, year, num = 5, region = 'Global', plot = True, 
         if show_plot:
             plt.show()
 
-def total_sales_over_time_in_region(df, region, plot = True, show_plot = False):
+def total_sales_over_time_in_region(df, region, plot = True, save_plot = True, show_plot = False):
     # Total Global Sales Over Time (Общие мировые продажи по времени)
     # → Что показывает: Общий объём продаж всех игр в мире в разбивке по месяцам или годам.
     # → Зачем: Позволяет понять общие тренды на рынке (спады, пики интереса к играм).
@@ -50,12 +50,13 @@ def total_sales_over_time_in_region(df, region, plot = True, show_plot = False):
     print("\n", ds_global_sales_over_time.to_string(index = False))
     if plot:
         ds_global_sales_over_time.plot(x='Year', y=region)
-        FIGURE_PATH = FIGURE_FOLDER + 'total_sales_over_time_in_' + region.replace(' ', '_') + '.png'
         plt.title('Total Sales of All Games Over Time in ' + region)
         plt.xlabel(None)
         plt.ylabel('Total Sales (in millions)')
         plt.tight_layout()
-        plt.savefig(FIGURE_PATH)
+        if save_plot:
+            FIGURE_PATH = FIGURE_FOLDER + 'total_sales_over_time_in_' + region.replace(' ', '_') + '.png'
+            plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
 
