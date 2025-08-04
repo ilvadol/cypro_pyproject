@@ -34,8 +34,9 @@ def genres_by_top_publishers(df, year, num = 5, region = 'Global', plot = True, 
         plt.ylabel(str(year) + ' Sales (in millions)')
         plt.xticks(rotation=45)
         plt.tight_layout()
-        FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top' + str(num) + '_publishers in ' + region.replace(' ', '_') + '.png'
-        plt.savefig(FIGURE_PATH)
+        if save_plot:
+            FIGURE_PATH = FIGURE_FOLDER + str(year) + '_top' + str(num) + '_publishers in ' + region.replace(' ', '_') + '.png'
+            plt.savefig(FIGURE_PATH)
         if show_plot:
             plt.show()
 

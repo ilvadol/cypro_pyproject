@@ -201,7 +201,7 @@ def analyseData():
                     print("Error: number of top publishers is not a digit or is empty. Going back...")
                     wait_for_key()
                     continue
-                if userTop >> int(DataFrame['Publisher'].nunique()):
+                if int(userTop) > int(DataFrame['Publisher'].nunique()):
                     print("Error: number of top publishers is higher than the number of unique publishers in the DataFrame. Going back...")
                     wait_for_key()
                     continue
@@ -265,7 +265,7 @@ def analyseData():
                 exit_program()
             case "sample":
                 print("Sample data are being generated...")
-                print("Showint Top Genres of 2016 by Top Publishers in Japan...")
+                print("Showing Top Genres of 2016 by Top Publishers in Japan...")
                 ap.genres_by_top_publishers(DataFrame, 2016, 5, 'Japan', save_plot=False, show_plot=True)
                 wait_for_key()
                 print("Showing total sales over time in Europe...")
