@@ -68,3 +68,32 @@ Select an option:
 2. Analyze Dataset
 3. Exit
 """
+
+analysismenu_graphic = """
+Analysis Menu
+"""
+
+analysismenu_text = """
+Select an option:
+1.
+2.
+3.
+4.
+5. Go Back
+"""
+
+genres_by_top_publishers_text = """
+[genres_by_top_publishers_text]
+"""
+
+total_sales_over_time_in_region_text = """
+[total_sales_over_time_in_region_text]
+"""
+
+franchise_sales_over_time_text = """
+[franchise_sales_over_time_text]
+"""
+
+average_sales_per_genre_per_region_text = """
+[average_sales_per_genre_per_region_text]
+"""
