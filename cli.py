@@ -136,12 +136,12 @@ command_list = {
 
 # Defining the function that checks the input against the command list
 def check_commandCall(entered_input):
-    lower_entered_input = str(entered_input).lower
-    func = command_list.get(lower_entered_input)
+    entered_input = str(entered_input).lower()
+    func = command_list.get(entered_input)
     if func is exit_program:
         func()
     if func is not None:
-        print (f"Executing command: " + lower_entered_input)
+        print (f"Executing command: " + entered_input)
         time.sleep(random.uniform(0.1, 0.5))
         func()
         return None
@@ -170,57 +170,115 @@ def analyseData():
     global ShowPlots
     global SavePlots
     global mainMenuFlag
+    if DataFrame is None:
+        print ("No data loaded. Please load data first.")
+        wait_for_key()
+        return
     while mainMenuFlag == False:
         clear_screen()
         print_centered(gm.analysismenu_graphic)
         print(gm.analysismenu_text)
         userChoice = input("Choose an option:\n>>> ")
-        userChoice = check_commandCall(userChoice)
+        check_commandCall(userChoice)
         match userChoice:
             case "1":
                 print(gm.genres_by_top_publishers_text)
-                userYear = input("Choose a year:\n>>> ")
-                userYear = check_commandCall(userYear)
-                if userYear == None:
+                print('DataFrame Columns:')
+                print(DataFrame.columns.tolist())
+                print('\nYear range in DataFrame: ' + str(int(DataFrame['Year'].max())) + '-' + str(int(DataFrame['Year'].min())))
+                userYear = input("Choose a single year:\n>>> ")
+                if userYear == '' or userYear.isalpha():
+                    print("Error: year is not a digit or is empty. Going back...")
+                    wait_for_key()
+                    continue
+                if int(userYear) < int(DataFrame['Year'].min()) or int(userYear) > int(DataFrame['Year'].max()):
+                    print("Error: year is not in the range of the DataFrame. Going back...")
+                    wait_for_key()
                     continue
                 userYear = int(userYear)
                 userTop = input("Choose a number of top publishers:\n>>> ")
-                userTop = check_commandCall(userTop)
-                if userTop == None:
+                if userTop == '' or userTop.isalpha():
+                    print("Error: number of top publishers is not a digit or is empty. Going back...")
+                    wait_for_key()
+                    continue
+                if userTop >> int(DataFrame['Publisher'].nunique()):
+                    print("Error: number of top publishers is higher than the number of unique publishers in the DataFrame. Going back...")
+                    wait_for_key()
                     continue
                 userTop = int(userTop)
                 userRegion = input("Choose a region:\n>>> ")
-                userRegion = check_commandCall(userRegion)
-                if userRegion == None:
+                if userRegion == '' or userRegion.isnumeric():
+                    print("Error: region is not a string or is empty. Going back...")
+                    wait_for_key()
+                    continue
+                if userRegion not in DataFrame.columns.tolist():
+                    print("Error: region is not a column in the DataFrame. Going back...")
+                    wait_for_key()
                     continue
                 ap.genres_by_top_publishers(df=DataFrame, year=userYear, num=userTop, region=userRegion, save_plot=SavePlots, show_plot=ShowPlots)
             case "2":
                 print(gm.total_sales_over_time_in_region_text)
+                print('DataFrame Columns:')
+                print(DataFrame.columns.tolist())
                 userRegion = input("Choose a region:\n>>> ")
-                userRegion = check_commandCall(userRegion)
-                if userRegion == None:
+                if userRegion == '' or userRegion.isnumeric():
+                    print("Error: region is not a string or is empty. Going back...")
+                    wait_for_key()
+                    continue
+                if userRegion not in DataFrame.columns.tolist():
+                    print("Error: region is not a column in the DataFrame. Going back...")
+                    wait_for_key()
                     continue
                 ap.total_sales_over_time_in_region(df=DataFrame, region=userRegion, save_plot=SavePlots, show_plot=ShowPlots)
             case "3":
                 print(gm.franchise_sales_over_time_text)
+                print('DataFrame Columns:')
+                print(DataFrame.columns.tolist())
                 userFranshise = input("Choose a franchise:\n>>> ")
-                userFranshise = check_commandCall(userFranshise)
-                if userFranshise == None:
+                if userFranshise == '' or userFranshise.isnumeric():
+                    print("Error: franchise is not a string or is empty. Going back...")
+                    wait_for_key()
                     continue
                 userRegion = input("Choose a region:\n>>> ")
-                userRegion = check_commandCall(userRegion)
-                if userRegion == None:
+                if userRegion == '' or userRegion.isnumeric():
+                    print("Error: region is not a string or is empty. Going back...")
+                    wait_for_key()
+                    continue
+                if userRegion not in DataFrame.columns.tolist():
+                    print("Error: region is not a column in the DataFrame. Going back...")
+                    wait_for_key()
                     continue
                 ap.franchise_sales_over_time(df=DataFrame, franchise_name=userFranshise, region=userRegion, save_plot=SavePlots, show_plot=ShowPlots)
             case "4":
                 print(gm.average_sales_per_genre_per_region_text)
+                print('DataFrame Columns:')
+                print(DataFrame.columns.tolist())
                 userRegion = input("Choose a region:\n>>> ")
-                userRegion = check_commandCall(userRegion)
-                if userRegion == None:
+                if userRegion == '' or userRegion.isnumeric():
+                    print("Error: region is not a string or is empty. Going back...")
+                    wait_for_key()
                     continue
                 ap.average_sales_per_genre_per_region(df=DataFrame, region=userRegion, save_plot=SavePlots, show_plot=ShowPlots)
             case "5":
                 mainMenuFlag = True
+            case "6":
+                exit_program()
+            case "sample":
+                print("Sample data are being generated...")
+                print("Showint Top Genres of 2016 by Top Publishers in Japan...")
+                ap.genres_by_top_publishers(DataFrame, 2016, 5, 'Japan', save_plot=False, show_plot=True)
+                wait_for_key()
+                print("Showing total sales over time in Europe...")
+                ap.total_sales_over_time_in_region(DataFrame, 'Europe', save_plot=False, show_plot=True)
+                wait_for_key()
+                print("Showing Call of Duty franchise sales over time in Global...")
+                ap.franchise_sales_over_time(DataFrame, 'Call of Duty', 'Global', save_plot=False, show_plot=True)
+                wait_for_key()
+                print("Showing average sales per genre in North America...")
+                ap.average_sales_per_genre_per_region(DataFrame, 'North America', save_plot=False, show_plot=True)
+                wait_for_key()
+            case None:
+                continue
             case _:
                 print("Invalid choice. Please try again.")
                 wait_for_key()
@@ -232,7 +290,7 @@ def main():
         mainMenuFlag = True
         print_mainmenu()
         userInput = input(">>> ")
-        check_commandCall(userInput)
+        userInput = check_commandCall(userInput)
         match userInput:
             case '1':
                 global DATAPATH
@@ -244,9 +302,10 @@ def main():
                 else:
                     mainMenuFlag = False
                     analyseData()
-
             case '3':
                 exit_program()
+            case None:
+                continue
             case _:
                 print ("Invalid choice. Please try again.")
 
