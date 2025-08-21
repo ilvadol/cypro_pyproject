@@ -79,6 +79,8 @@ Select an option:
 1. Load Dataset
 2. Analyze Dataset
 3. Exit
+
+Type 'help' for more information
 """
 
 analysismenu_graphic = """
