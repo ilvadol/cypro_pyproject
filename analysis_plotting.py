@@ -5,10 +5,10 @@ from loading_cleaning import import_and_clean_data
 FIGURE_FOLDER = 'cypro_pyproject/figures/'
 
 def genres_by_top_publishers(df, year, num = 5, region = 'Global', plot = True, save_plot = True, show_plot = False):
-    # найти топ n издательств по продажам за определенный год
-    # показать число игр, опубликованных топовыми издательствами, по жанрам за тот же год
-    # эта функция показывыет на основе данных за определенный год жанры которые выпускают самые успешные по продажам компании
-    # какие жанры выпускают более продаваемые издатели/ как мыслят самые успешные компании и какие игры они выпускают
+    # Genres by Top Publishers in Region
+    # → What it shows: The genres and games released by the top publishers in a given region.
+    # → Why: Helps identify market trends and popular genres among the most successful publishers.
+    # Find top n publishers by sales for a given year and show the number of games published by top publishers by genre for the same year
     df_publishers = df[df['Year'] == year][['Publisher', region]].groupby('Publisher')
     ds_top_publishers = df_publishers[region].sum().sort_values(ascending=False).head(num)
     print("\n", ds_top_publishers)
@@ -41,10 +41,10 @@ def genres_by_top_publishers(df, year, num = 5, region = 'Global', plot = True, 
             plt.show()
 
 def total_sales_over_time_in_region(df, region, plot = True, save_plot = True, show_plot = False):
-    # Total Global Sales Over Time (Общие мировые продажи по времени)
-    # → Что показывает: Общий объём продаж всех игр в мире в разбивке по месяцам или годам.
-    # → Зачем: Позволяет понять общие тренды на рынке (спады, пики интереса к играм).
-    # Группировка по году и суммирование продаж
+    # Total Sales Over Time in the Region
+    # → What it shows: The total volume of sales of all games in the region by months or years.
+    # → Why: It allows to understand the overall trends in the market (downturns, peaks of interest in games).
+    # Grouping by year and summing up sales
     ds_global_sales_over_time = df.groupby('Year')[region].sum()
     ds_global_sales_over_time = ds_global_sales_over_time.reset_index()
     ds_global_sales_over_time['Year'] = ds_global_sales_over_time['Year'].astype(int)
@@ -62,8 +62,10 @@ def total_sales_over_time_in_region(df, region, plot = True, save_plot = True, s
             plt.show()
 
 def franchise_sales_over_time(df, franchise_name, region, plot = True, save_plot = True, show_plot = False):
-    # Franchise Sales Over Time (Продажи по франшизам)
-    # → Что показывает: Объём продаж одной франшизы в разбивке по месяцам или годам.
+    # Franchise Sales Over Time
+    # → What it shows: The volume of sales of one franchise broken down by months or years.
+    # → Why: Helps identify the performance of the given franchise in the market.
+    # Grouping by game and summing up sales
     df_franchise = df[df['Game'].str.contains(franchise_name, case=False)]
     ds_franchise_sales_over_time = df_franchise.groupby('Game')[region].sum()
     ds_franchise_sales_over_time = ds_franchise_sales_over_time.reset_index().sort_values(region, ascending=False)
@@ -83,15 +85,14 @@ def franchise_sales_over_time(df, franchise_name, region, plot = True, save_plot
 
 
 def average_sales_per_genre_per_region(df, region, plot = True, save_plot = True, show_plot = False):
-    # Average Sales per Genre per Region (Средние продажи игр по жанрам по регионам)
-    # → Что показывает: Средний объём продаж одной игры в каждом регионе (NA, EU, JP, Other).
-    # → Зачем: Помогает выявить регионы с наибольшей вовлечённостью в покупку игр.
-    # Группировка по жанру и региону, вычисление среднего значения продаж
+    # Average Sales per Genre per Region
+    # → What it shows: The average volume of sales of one game in each region (NA, EU, JP, Other).
+    # → Why: Helps identify regions with the highest engagement in buying games.
+    # Grouping by genre and region, calculating the average sales
     ds_avg_sales = df.groupby('Genre')[region].mean().reset_index()
     ds_avg_sales = ds_avg_sales.sort_values(region, ascending=False)
     print("\n", ds_avg_sales.to_string(index=False))
     if plot:
-        # Построение графика
         ds_avg_sales.plot(x='Genre', y=region, kind='bar', color='blue')
         plt.title('Average Sales per Genre in ' + region)
         plt.xlabel('Genre')
