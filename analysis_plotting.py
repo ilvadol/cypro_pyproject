@@ -15,7 +15,6 @@ def genres_by_top_publishers(df, year, num = 5, region = 'Global', plot = True, 
     ds_top_genres = df[(df['Year'] == year) & (df['Publisher'].isin(ds_top_publishers.index))][['Genre']]
     ds_top_genres = ds_top_genres.sort_values('Genre', ascending=False)
     print("\n", ds_top_genres.value_counts())
-    # print(ds_publishers.value_counts()) если хотим посмотреть топ издательств относительно кол-ва игр
     if plot:
         ds_top_genres.value_counts().plot(kind='bar', color='green')
         plt.title('Top Genres of ' + str(year) + ' by Top Publishers in ' + region)
