@@ -86,15 +86,12 @@ Each of these functions has the following parameters (excluding those parameters
 This file contains ASCII art, various menu messages, and is used by `cli.py`. It does not contain any functions.
 
 ### Tools & Technologies
-- Python
-- Pandas
-- NumPy
-- Matplotlib
+- Python v.3.13.5
 
 ### Used External Libraries
-- Pandas
-- NumPy
-- Matplotlib
+- Pandas v.2.3.1
+- NumPy v.2.3.1
+- Matplotlib v.3.10.3
 
 ## Dataset Description
 The dataset used in this project is a collection of sales data for PS4 games. The data is stored in a CSV file named PS4_GamesSales.csv and contains information about various games, including their sales figures in different regions.
