@@ -107,7 +107,8 @@ def exit_program():
 # Defining the function to print the help message
 def print_help():
     clear_screen()
-    print_centered(gm.helpmessage)
+    print_centered(gm.helpgraphic)
+    print(gm.helpmessage)
     wait_for_key()
     clear_screen()
 

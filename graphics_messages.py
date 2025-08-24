@@ -1,4 +1,4 @@
-helpmessage = """
+helpgraphic = """
 ##############################################
 #  ____  ____  ________  _____     _______   #
 # |_   ||   _||_   __  ||_   _|   |_   __ \  #
@@ -7,8 +7,27 @@ helpmessage = """
 #  _| |  | |_  _| |__/ | _| |__/ | _| |_     #
 # |____||____||________||________||_____|    #
 ##############################################
+"""
+
+helpmessage = """
+CyPro Sales Data Analyzer
+
+A CLI-wrapped program for analyzing sales data, providing insights into market trends and patterns. Key features include:
+
+* Data cleaning and preprocessing with options to fix data types, delete missing values, fill missing values, and remove duplicates
+* Export of cleaned data for further analysis
+* Analysis and visualization of sales data, including KPIs such as:
+	+ Top publishers by sales
+	+ Genres and games released by top publishers in a given region
+	+ Market trends and popular genres among the most successful publishers
 
 To print this help message from anywhere, type 'help'.
+To enable verbose mode, type 'verbose' or 'ver'.
+To clear the screen, type 'clear' or 'clr'.
+To go back to the main menu, type 'menu'.
+To show plots on the screen, type 'showplots' or 'shplt'.
+To save plots to disc, type 'saveplots' or 'svplt'.
+To exit the program, type 'exit' or 'quit'.
 
 Authors: Ilia Oleinikov & Svetlana Saveleva, copyright (c) 2025, licensed under the WTFPL License
 """
